@@ -87,7 +87,7 @@ get_stat() {
     name=${2}
     resource=${3}
     json=$(refresh_cache ${type})
-    res=`jq -r ".${type}.\"${name}\".${resource}" ${json}`
+    res=`jq -r ".\"${name}\".${resource}" ${json}`
     echo ${res}
 }
 #
