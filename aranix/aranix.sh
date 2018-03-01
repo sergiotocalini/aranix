@@ -79,15 +79,19 @@ refresh_cache() {
 
 discovery() {
     resource=${1}
-    json=$(refresh_cache ${resource})
+    json=$( refresh_cache ${resource} )
 }
 
 get_stat() {
     type=${1}
     name=${2}
     resource=${3}
-    json=$(refresh_cache ${type})
-    res=`jq -r ".\"${name}\".${resource}" ${json}`
+    json=$( refresh_cache ${type} )
+    if [[ ${type} =~ server_.* ]]; then
+	res=`jq -r ".\"${name}\"" ${json}`
+    else
+	res=`jq -r ".\"${name}\".${resource}" ${json}`
+    fi
     echo ${res}
 }
 #
@@ -120,7 +124,7 @@ done
 
 
 if [[ ${JSON} -eq 1 ]]; then
-    rval=$(discovery ${ARGS[*]})
+    rval=$(discovery ${SECTION} ${ARGS[*]})
     echo '{'
     echo '   "data":['
     count=1
