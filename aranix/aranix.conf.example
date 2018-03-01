@@ -1,0 +1,2 @@
+ARANGODB_URL="http://localhost:8529"
+CACHE_TTL=1
