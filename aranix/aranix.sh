@@ -60,8 +60,8 @@ refresh_cache() {
     if [[ $(( `stat -c '%Y' "${file}" 2>/dev/null`+60*${CACHE_TTL} )) -le ${TIMESTAMP} ]]; then
 	if [[ ${type} == 'stats' ]]; then
 	    RESOURCE="/_admin/statistics"
-	elif [[ ${type} =~ 'server_.*' ]]; then
-	    if [[ ${type} =~ '.*_role' ]]; then
+	elif [[ ${type} =~ server_.* ]]; then
+	    if [[ ${type} =~ .*_role ]]; then
 		RESOURCE="/_admin/server/role"
 	    else
 		RESOURCE="/_admin/server/id"
