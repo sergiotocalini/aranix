@@ -143,7 +143,7 @@ if [[ ${JSON} -eq 1 ]]; then
     echo '   ]'
     echo '}'
 else
-    rval=$( get_stat ${ARGS[*]} )
+    rval=$( get_stat ${SECTION} ${ARGS[*]} )
     rcode="${?}"
     echo ${rval:-0}
 fi
