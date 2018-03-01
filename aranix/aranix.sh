@@ -16,6 +16,7 @@ APP_WEB="http://www.sergiotocalini.com.ar/"
 TIMESTAMP=`date '+%s'`
 CACHE_DIR=${APP_DIR}/tmp
 CACHE_TTL=5                                      # IN MINUTES
+ARANGODB_URL="http://localhost:8529"
 #
 #################################################################################
 
