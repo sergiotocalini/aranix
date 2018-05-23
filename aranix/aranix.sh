@@ -69,6 +69,8 @@ refresh_cache() {
 	    fi
 	elif [[ ${type} == 'cluster-stats' ]]; then
 	    RESOURCE="/_admin/clusterStatistics"
+	elif [[ ${type} == 'api-version' ]]; then
+	    RESOURCE="/_api/version"
 	else
 	    return 1
 	fi
