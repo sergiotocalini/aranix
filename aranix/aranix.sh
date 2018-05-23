@@ -90,7 +90,7 @@ get_stat() {
     name=${2}
     resource=${3}
     json=$( refresh_cache ${type} )
-    if [[ ${type} =~ server_.* ]]; then
+    if [[ ${type} =~ (server_.*|api-version) ]]; then
 	res=`jq -r ".\"${name}\"" ${json}`
     else
 	res=`jq -r ".\"${name}\".${resource}" ${json}`
