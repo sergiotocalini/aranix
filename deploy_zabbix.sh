@@ -26,8 +26,8 @@ while getopts ":o:p:u:P:Z:FH" OPTION; do
 	    ;;
 	P)
 	    SCRIPT_DIR="${OPTARG}"
-	    if [[ ! "${SCRIPT_DIR}" =~ .*lostix ]]; then
-		     SCRIPT_DIR="${SCRIPT_DIR}/lostix"
+	    if [[ ! "${SCRIPT_DIR}" =~ .*aranix ]]; then
+		SCRIPT_DIR="${SCRIPT_DIR}/aranix"
 	    fi
 	    ;;
 	Z)
