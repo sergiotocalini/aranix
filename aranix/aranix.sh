@@ -11,8 +11,9 @@ PATH=/usr/local/bin:${PATH}
 #
 APP_NAME=$(basename $0)
 APP_DIR=$(dirname $0)
-APP_VER="0.0.1"
-APP_WEB="http://www.sergiotocalini.com.ar/"
+APP_VER="1.0.0"
+APP_WEB="https://sergiotocalini.github.io/"
+APP_FIX="https://github.com/sergiotocalini/aranix/issues"
 TIMESTAMP=`date '+%s'`
 CACHE_DIR=${APP_DIR}/tmp
 CACHE_TTL=5                                      # IN MINUTES
@@ -45,7 +46,7 @@ usage() {
     echo "  -s ARG(str)   Section (default=stat)."
     echo "  -v            Show the script version."
     echo ""
-    echo "Please send any bug reports to sergiotocalini@gmail.com"
+    echo "Please send any bug reports to ${APP_FIX}"
     exit 1
 }
 
@@ -132,27 +133,29 @@ if [[ ${JSON} -eq 1 ]]; then
     echo '   "data":['
     count=1
     while read line; do
-        IFS="|" values=(${line})
-        output='{ '
-        for val_index in ${!values[*]}; do
-            output+='"'{#${JSON_ATTR[${val_index}]:-${val_index}}}'":"'${values[${val_index}]}'"'
-            if (( ${val_index}+1 < ${#values[*]} )); then
-                output="${output}, "
-            fi
-        done 
-        output+=' }'
-        if (( ${count} < `echo ${rval}|wc -l` )); then
-            output="${output},"
-        fi
-        echo "      ${output}"
-        let "count=count+1"
+        if [[ ${line} != '' ]]; then
+           IFS="|" values=(${line})
+           output='{ '
+           for val_index in ${!values[*]}; do
+              output+='"'{#${JSON_ATTR[${val_index}]:-${val_index}}}'":"'${values[${val_index}]}'"'
+              if (( ${val_index}+1 < ${#values[*]} )); then
+                 output="${output}, "
+              fi
+           done
+           output+=' }'
+           if (( ${count} < `echo ${rval}|wc -l` )); then
+              output="${output},"
+           fi
+           echo "      ${output}"
+	fi
+	let "count=count+1"
     done <<< ${rval}
     echo '   ]'
     echo '}'
 else
     rval=$( get_stat ${SECTION} ${ARGS[*]} )
     rcode="${?}"
-    echo ${rval:-0}
+    echo "${rval:-0}"
 fi
 
 exit ${rcode}
