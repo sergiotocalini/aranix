@@ -40,7 +40,7 @@ the same directory than the script.*
 
 ``` bash
 ~# git clone https://github.com/sergiotocalini/aranix.git
-~# sudo ./aranix/deploy_zabbix.sh -u "http://localhost:9600"
+~# sudo ./aranix/deploy_zabbix.sh -u "http://localhost:8529"
 ~# sudo systemctl restart zabbix-agent
 ```
 *__Note:__ the installation has to be executed on the zabbix agent host and you have
